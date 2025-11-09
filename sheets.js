@@ -14,7 +14,7 @@ async function addSubscriber(email) {
   const timestamp = new Date().toISOString();
   await sheets.spreadsheets.values.append({
     spreadsheetId: SPREADSHEET_ID,
-    range: "Sheet1!A:B",
+    range: "Subscribers!A:B",
     valueInputOption: "USER_ENTERED",
     requestBody: {
       values: [[email, timestamp]],
