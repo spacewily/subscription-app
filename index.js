@@ -1,17 +1,17 @@
 const express = require("express");
 const path = require("path");
+const { addSubscriber } = require("./sheets");
 const app = express();
 
 app.use(express.static("public"));
 app.use(express.json());
 
-app.post("/subscribe", (req, res) => {
+app.post("/subscribe", async (req, res) => {
   const { email } = req.body;
-  console.log(`New subscription from: ${email}`);
-  res.json({ message: "Subscription received!" });
+  await addSubscriber(email);
+  res.json({ message: "Subscription saved to Google Sheets!" });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Server running");
 });
