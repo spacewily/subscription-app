@@ -1,5 +1,5 @@
 const { google } = require("googleapis");
-const credentials = require("./credentials.json"); // your downloaded JSON
+const credentials = require("./subscribers-477711-9f8ce0569bb4.json"); // your downloaded JSON
 
 const auth = new google.auth.GoogleAuth({
   credentials,
