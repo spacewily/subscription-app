@@ -1,15 +1,15 @@
 const express = require("express");
 const path = require("path");
-const { addSubscriber } = require("./sheets");
+const { addSubscriber } = require("./sheets"); // Make sure sheets.js exists
 const app = express();
 
-app.use(express.static("public"));
-app.use(express.json());
+app.use(express.static("public")); // Serves HTML/CSS/JS
+app.use(express.json()); // Parses JSON body
 
 app.post("/subscribe", async (req, res) => {
   const { email } = req.body;
   try {
-    await addSubscriber(email);
+    await addSubscriber(email); // Saves to Google Sheets
     res.json({ message: "Subscription saved to Google Sheets!" });
   } catch (error) {
     console.error("Error saving to Sheets:", error);
@@ -17,6 +17,7 @@ app.post("/subscribe", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Server running");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
